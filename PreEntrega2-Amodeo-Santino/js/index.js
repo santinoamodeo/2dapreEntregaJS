@@ -1,42 +1,26 @@
-
-class SelectionProduct{
-    constructor(producto, fecha, puntoVenta){
-        this.producto = producto;
-        this.fecha = fecha || new Date (); 
-        this.puntoVenta = puntoVenta;
-    }
-}
-
-class Price{
-    constructor(costo, cuotas){
-        this.costo = Math.round(costo);
+class Producto{
+    constructor(nombreDelProducto, fecha, puntoDeVenta, costo, cuotas){
+        this.nombreDelProducto = nombreDelProducto.toUpperCase();
+        this.fecha = fecha;
+        this.puntoDeVenta = puntoDeVenta.toUpperCase();
+        this.costo = parseFloat(costo);
         this.cuotas = cuotas;
+        this.vendido = false;
+    }
+    sumaIva(){
+        this.precio = this.precio * 1.21;
     }
 }
 
-let venta1 = new SelectionProduct("Iphone 11", 20-10-2019,"Web");
-let venta2 = new SelectionProduct("MacBook 11", 21-10-2019,"Web");
+const productos = [];
+productos.push(new Producto("Iphone 12", 12-12-21, "Online", 450, 1));
+productos.push(new Producto("Iphone 13", 15-2-22, "Local", 650, 3));
+productos.push(new Producto("Iphone 14", 1-10-22, "Online", 800, 12));
 
-let precio1 = new Price(1000,3);
-let precio2 = new Price(2500, 1);
+for (const producto of productos)
+    producto.sumaIva();
 
-function descuentoXWeb(SelectionProduct){
-    if(SelectionProduct.puntoVenta == "Online" || SelectionProduct.puntoVenta == "Web"){
-        console.log("Pagaras mas barato por utilizar la web!")
-    }else{
-        console.log("Te recomendamos comprar por la web")
-    }
-}
+console.log(productos.length)
 
-function descontando(Price){
-    let tres = prompt("En cuantas cuotas pagaras?");
-    if(Price.cuotas >= 3){
-        tres = Price.costo * 1.21;
-        alert(tres);
-    }else{
-        console.log(`Pagaras en ${tres}`);
-    }
-}
-
-descontando(Price);
+const carrito = [];
 
